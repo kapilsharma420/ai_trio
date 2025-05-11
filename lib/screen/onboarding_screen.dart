@@ -70,15 +70,7 @@ Spacer(),
                       shape: BoxShape.circle,
                     ),
                   ),
-                  // SizedBox(width: mq.width * .02),
-                  // Container(
-                  //   height: 10,
-                  //   width: 10,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.black54,
-                  //     shape: BoxShape.circle,
-                  //   ),
-                  // ),
+                  
                 ],
               ),
             ],
