@@ -1,8 +1,8 @@
 import 'package:ai_trio/helper/global.dart';
-import 'package:ai_trio/screen/homescreen.dart';
+import 'package:ai_trio/screen/onboarding_screen.dart';
 import 'package:ai_trio/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -19,7 +19,7 @@ class _SplashscreenState extends State<Splashscreen> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Homescreen()),
+        MaterialPageRoute(builder: (context) => OnboardingScreen()),
       );
     });
   }
