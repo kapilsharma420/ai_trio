@@ -1,8 +1,8 @@
-import 'package:ai_trio/helper/global.dart';
 import 'package:ai_trio/helper/pref.dart';
 import 'package:ai_trio/model/onboard.dart';
 import 'package:ai_trio/screen/homescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -40,7 +40,7 @@ class OnboardingScreen extends StatelessWidget {
               //lottie ai ask me animation
               LottieBuilder.asset(
                 'assets/LottieAnimation/${list[index].lottie}.json',
-                height: mq.height * .6,width: islast? mq.width*.7:null ,
+                height: Get.height * .6,width: islast? Get.width*.7:null ,
               ),
 
               //title
@@ -54,10 +54,10 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ),
               //for some space
-              SizedBox(height: mq.height * .015),
+              SizedBox(height: Get.height * .015),
               //subtitle
               SizedBox(
-                width: mq.width * .7,
+                width: Get.width * .7,
                 child: Text(
                   list[index].subtitle,
 
@@ -74,7 +74,7 @@ class OnboardingScreen extends StatelessWidget {
               Wrap(
                 children: [
                   //for some space
-                  SizedBox(height: mq.height * .05),
+                  SizedBox(height: Get.height * .05),
 
                   //dots
                   Row(
@@ -94,7 +94,7 @@ class OnboardingScreen extends StatelessWidget {
                                   : BoxShape.circle,
                         ),
                       ),
-                      SizedBox(width: mq.width * .02),
+                      SizedBox(width: Get.width * .02),
                       Container(
                         height: 10,
                         width: 10,
@@ -124,7 +124,7 @@ class OnboardingScreen extends StatelessWidget {
                   shape: StadiumBorder(),
                   elevation: 0,
                   backgroundColor: Colors.blue,
-                  minimumSize: Size(mq.width * .4, 50),
+                  minimumSize: Size(Get.width * .4, 50),
                 ),
 
                 onPressed: () async {
@@ -132,10 +132,7 @@ class OnboardingScreen extends StatelessWidget {
                        // ✅ Save flag when onboarding is completed
                      await Prefs.setOnboardingDone();  
                        // ✅ Navigate to HomeScreen and replace onboarding
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => Homescreen()),
-                    );
+                   Get.off(() => Homescreen());
                   } else {
                      // If not the last page, go to the next onboarding slide
                     c.nextPage(

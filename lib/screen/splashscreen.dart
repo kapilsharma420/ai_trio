@@ -1,9 +1,9 @@
-import 'package:ai_trio/helper/global.dart';
 import 'package:ai_trio/helper/pref.dart';
 import 'package:ai_trio/screen/homescreen.dart';
 import 'package:ai_trio/screen/onboarding_screen.dart';
 import 'package:ai_trio/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class Splashscreen extends StatefulWidget {
@@ -29,18 +29,15 @@ class _SplashscreenState extends State<Splashscreen> {
 
   // ✅ If onboarding is already done, go to HomeScreen
   // ✅ Else, show OnboardingScreen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => done ? Homescreen() : OnboardingScreen(),
-      ),
-    );
+   
+ //navigate with getx
+
+    Get.off(() => done ? Homescreen() : OnboardingScreen());
   }
 
   @override
   Widget build(BuildContext context) {
-    //initializing the size of device
-    mq = MediaQuery.sizeOf(context);
+   
     return Scaffold(
       //body
       body: SizedBox(
@@ -55,10 +52,10 @@ class _SplashscreenState extends State<Splashscreen> {
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: Padding(
-                padding: EdgeInsets.all(mq.width * .05),
+                padding: EdgeInsets.all(Get.width * .05),
                 child: Image.asset(
                   'assets/images/SS_pic.png',
-                  width: mq.width * .4,
+                  width: Get.width * .4,
                 ),
               ),
             ),

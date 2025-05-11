@@ -36,10 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   
   icons_launcher: ^3.0.1 #for change the app icon 
-  get: ^4.7.2 #for simplifying the process and state management
+
   lottie: ^3.3.1 #for adding lottie animation
   shared_preferences: ^2.5.3 #for storing the data locally
+  get: ^4.7.2 #for simplifying the process and state management
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

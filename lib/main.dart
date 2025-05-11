@@ -1,6 +1,7 @@
 import 'package:ai_trio/screen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 void main() async{
    // Ensures that widget binding is initialized before running the app  ( Make sure Flutter is ready)
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      title: 'AI Trio',
       debugShowCheckedModeBanner: false,
       home:Splashscreen()
     );
