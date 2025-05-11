@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.kapil_sharma_420.ai_trio"
-    compileSdk = 34
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

@@ -1,4 +1,6 @@
 import 'package:ai_trio/helper/global.dart';
+import 'package:ai_trio/helper/pref.dart';
+import 'package:ai_trio/screen/homescreen.dart';
 import 'package:ai_trio/screen/onboarding_screen.dart';
 import 'package:ai_trio/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +18,23 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen()),
-      );
-    });
+    //function to check if onboarding is done or not
+    _checkOnboarding();
+    
+  }
+
+  Future<void> _checkOnboarding() async {
+    await Future.delayed(Duration(seconds: 2));  // Delay to show splash screen
+    final done = await Prefs.isOnboardingDone(); // ✅ Check onboarding status
+
+  // ✅ If onboarding is already done, go to HomeScreen
+  // ✅ Else, show OnboardingScreen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => done ? Homescreen() : OnboardingScreen(),
+      ),
+    );
   }
 
   @override
