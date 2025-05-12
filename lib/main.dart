@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-void main() async{
-   // Ensures that widget binding is initialized before running the app  ( Make sure Flutter is ready)
+void main() async {
+  // Ensures that widget binding is initialized before running the app  ( Make sure Flutter is ready)
   WidgetsFlutterBinding.ensureInitialized();
-   // Hides system UI (like status and navigation bars) in immersive sticky mode
- await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  // Hides system UI (like status and navigation bars) in immersive sticky mode
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   // Locks the app orientation to portrait mode only (both up and down)
- await SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
+
   runApp(const MyApp());
 }
 
@@ -23,9 +23,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+        ),
+      ),
       title: 'AI Trio',
       debugShowCheckedModeBanner: false,
-      home:Splashscreen()
+      home: Splashscreen(),
     );
   }
 }
