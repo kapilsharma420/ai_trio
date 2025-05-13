@@ -40,7 +40,8 @@ dependencies:
   lottie: ^3.3.1 #for adding lottie animation
   shared_preferences: ^2.5.3 #for storing the data locally
   get: ^4.7.2 #for simplifying the process and state management
-
+  flutter_animate: ^4.5.2 #for custom animations
+  http: ^1.4.0 #for making http requests
   
 dev_dependencies:
   flutter_test:

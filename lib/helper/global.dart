@@ -1,0 +1,1 @@
+const chatgptApiKey = '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';

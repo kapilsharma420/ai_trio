@@ -1,5 +1,6 @@
 import 'package:ai_trio/model/home_type.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -9,6 +10,9 @@ class Homecart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //for developing purpose
+    Animate.restartOnHotReload = true;
+
     return Card(
       color: Colors.blue.withOpacity(.2),
       elevation: 0,
@@ -21,13 +25,12 @@ class Homecart extends StatelessWidget {
               ? Row(
                 children: [
                   //lottie animation
-                   Container(
-                      width: Get.width * 0.35,
+                  Container(
+                    width: Get.width * 0.35,
                     child: Padding(
                       padding: homeType.padding,
                       child: Lottie.asset(
                         'assets/LottieAnimation/${homeType.lottie}',
-                      
                       ),
                     ),
                   ),
@@ -64,17 +67,17 @@ class Homecart extends StatelessWidget {
 
                   //lottie animation
                   Container(
-                      width: Get.width * 0.35,
+                    width: Get.width * 0.35,
                     child: Padding(
                       padding: homeType.padding,
                       child: Lottie.asset(
                         'assets/LottieAnimation/${homeType.lottie}',
-                      
                       ),
                     ),
                   ),
                 ],
               ),
-    );
+   ).animate().fade(begin: 0.0, end: 1.0, duration: 2000.ms).scale(curve: Curves.easeInOut);
+
   }
 }
