@@ -2,7 +2,6 @@ import 'package:ai_trio/helper/global.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 /// APIs class handles all API related operations
 class APIs {
   // Base URL for the ChatGPT API endpoint
@@ -62,4 +61,5 @@ class APIs {
       throw Exception('Error getting answer: $e');
     }
   }
+  
 }

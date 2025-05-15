@@ -25,10 +25,19 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            color: Colors.blue,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+
+          elevation: 1,
+
           centerTitle: true,
           backgroundColor: Colors.white,
         ),
       ),
+
       title: 'AI Trio',
       debugShowCheckedModeBanner: false,
       home: Splashscreen(),

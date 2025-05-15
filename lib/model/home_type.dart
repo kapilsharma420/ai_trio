@@ -1,4 +1,9 @@
+import 'package:ai_trio/screen/features/chatbot_feature.dart';
+import 'package:ai_trio/screen/features/img_gen_feature.dart';
+import 'package:ai_trio/screen/features/lang_trans_feature.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
 enum HomeType { aiChatBot, aiImage, aiTranslator }
 
@@ -32,4 +37,13 @@ extension MyHomeType on HomeType {
     HomeType.aiTranslator => EdgeInsets.zero,
     
   };
+    //for navigation 
+  VoidCallback get onTap => switch (this) {
+    HomeType.aiChatBot =>()=>Get.to(()=>  ChatbotFeature()),
+    HomeType.aiImage =>()=> Get.to(()=> ImageFeature()),
+    HomeType.aiTranslator => ()=>Get.to(()=>  TranslatorFeature()),
+  
+    
+  };
+    
 }

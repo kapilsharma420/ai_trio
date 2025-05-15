@@ -21,7 +21,10 @@ class Homecart extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child:
-          homeType.leftAlign
+         InkWell(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          onTap: () => homeType.onTap(),
+          child:  homeType.leftAlign
               ? Row(
                 children: [
                   //lottie animation
@@ -64,7 +67,7 @@ class Homecart extends StatelessWidget {
                   ),
                   //for  some space
                   Spacer(),
-
+    
                   //lottie animation
                   Container(
                     width: Get.width * 0.35,
@@ -76,8 +79,8 @@ class Homecart extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-   ).animate().fade(begin: 0.0, end: 1.0, duration: 2000.ms).scale(curve: Curves.easeInOut);
+              ),)
+       ).animate().fade(begin: 0.0, end: 1.0, duration: 2000.ms).scale(curve: Curves.easeInOut);
 
   }
 }
