@@ -20,7 +20,7 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
       //floating action button i.e text field
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8,),
         child: Row(
           children: [
             Expanded(
@@ -64,8 +64,13 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
       //body
       body: Obx(
         () => ListView(
+           padding: EdgeInsets.only(
+            bottom: 55, // Add padding to prevent messages from hiding under input field
+            left: 8,
+            right: 8,
+          ),
           controller: _c.scrollC,
-          physics: BouncingScrollPhysics(),
+          physics: ScrollPhysics(),
           children: _c.List.map((e) => MessageCard(message: e)).toList()),
       ),
     );
