@@ -1,65 +1,46 @@
-import 'package:ai_trio/helper/global.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'dart:developer';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import '../helper/global.dart';
 
-/// APIs class handles all API related operations
 class APIs {
-  // Base URL for the ChatGPT API endpoint
-  static const String apiUrl = 'https://api.openai.com/v1/chat/completions';
-  
-  /// Gets an answer from ChatGPT for the given question
-  /// 
-  /// Parameters:
-  /// - question: The user's input question to be answered by ChatGPT
-  /// 
-  /// Returns:
-  /// - Future<String>: The response text from ChatGPT
-  /// 
-  /// Throws:
-  /// - Exception: If API call fails or response processing fails
+  /// Get answer from Google Gemini AI
   static Future<String> getAnswer(String question) async {
+    // Check for empty or whitespace-only input
+    if (question.trim().isEmpty) {
+      return 'Please enter a valid question.';
+    }
+
     try {
-      // Make POST request to ChatGPT API
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {
-          // Specify JSON content type for request
-          'Content-Type': 'application/json',
-          // Add API key for authentication
-          'Authorization': 'Bearer $chatgptApiKey',
-        },
-        // Convert request body to JSON string
-        body: jsonEncode({
-          // Specify the ChatGPT model to use
-          'model': 'gpt-3.5-turbo',
-          // Format the conversation messages
-          'messages': [
-            {
-              'role': 'user',
-              'content': question,
-            }
-          ],
-          // Control randomness in responses (0-1)
-          'temperature': 0.7,
-          // Limit response length to 2000 tokens
-          'max_tokens': 2000,
-        }),
+      log('api key: $ApiKey');
+      log('user question: $question');
+
+      final model = GenerativeModel(
+        model: 'gemini-1.5-flash-latest',
+        apiKey: ApiKey,
       );
 
-      // Check if request was successful
-      if (response.statusCode == 200) {
-        // Parse the JSON response
-        final data = jsonDecode(response.body);
-        // Extract and return the answer text
-        return data['choices'][0]['message']['content'];
-      } else {
-        // Throw error if request failed
-        throw Exception('Failed to get response: ${response.statusCode}');
+      final content = [Content.text(question)];
+      final res = await model.generateContent(
+        content,
+        safetySettings: [
+          SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.none),
+          SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.none),
+          SafetySetting(HarmCategory.harassment, HarmBlockThreshold.none),
+          SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.none),
+        ],
+      );
+
+      final answer = res.text;
+
+      if (answer == null || answer.trim().isEmpty) {
+        return 'AI could not generate a response.';
       }
+
+      log('res: $answer');
+      return answer;
     } catch (e) {
-      // Handle any errors during API call or response processing
-      throw Exception('Error getting answer: $e');
+      log('getAnswerGeminiE: $e');
+      return 'Something went wrong (Try again in sometime)';
     }
   }
-  
 }

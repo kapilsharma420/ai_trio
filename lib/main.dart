@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
+          iconTheme: IconThemeData(color: Colors.blue),
 
           elevation: 1,
 

@@ -37,6 +37,7 @@ extension MyHomeType on HomeType {
     HomeType.aiTranslator => EdgeInsets.zero,
     
   };
+  
     //for navigation 
   VoidCallback get onTap => switch (this) {
     HomeType.aiChatBot =>()=>Get.to(()=>  ChatbotFeature()),
