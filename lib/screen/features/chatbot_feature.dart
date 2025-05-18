@@ -63,10 +63,8 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
       body: Obx(
         () => ListView(
           padding: EdgeInsets.only(
-            bottom:
-                55, // Add padding to prevent messages from hiding under input field
-            left: 8,
-            right: 8,
+            top: Get.height * .02,
+            bottom: Get.height * .08,
           ),
           controller: _c.scrollC,
           physics: ScrollPhysics(),
