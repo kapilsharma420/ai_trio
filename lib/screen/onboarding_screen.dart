@@ -1,6 +1,7 @@
 import 'package:ai_trio/helper/pref.dart';
 import 'package:ai_trio/model/onboard.dart';
 import 'package:ai_trio/screen/homescreen.dart';
+import 'package:ai_trio/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -40,7 +41,8 @@ class OnboardingScreen extends StatelessWidget {
               //lottie ai ask me animation
               LottieBuilder.asset(
                 'assets/LottieAnimation/${list[index].lottie}.json',
-                height: Get.height * .6,width: islast? Get.width*.7:null ,
+                height: Get.height * .6,
+                width: islast ? Get.width * .7 : null,
               ),
 
               //title
@@ -115,37 +117,24 @@ class OnboardingScreen extends StatelessWidget {
               ),
               Spacer(),
               //button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  shape: StadiumBorder(),
-                  elevation: 0,
-                  backgroundColor: Colors.blue,
-                  minimumSize: Size(Get.width * .4, 50),
-                ),
-
-                onPressed: () async {
+              CustomButton(
+                onTap: () async {
                   if (islast) {
-                       // ✅ Save flag when onboarding is completed
-                     await Prefs.setOnboardingDone();  
-                       // ✅ Navigate to HomeScreen and replace onboarding
-                   Get.off(() => Homescreen());
+                    // ✅ Save flag when onboarding is completed
+                    await Prefs.setOnboardingDone();
+                    // ✅ Navigate to HomeScreen and replace onboarding
+                    Get.off(() => Homescreen());
                   } else {
-                     // If not the last page, go to the next onboarding slide
+                    // If not the last page, go to the next onboarding slide
                     c.nextPage(
                       duration: Duration(milliseconds: 600),
                       curve: Curves.ease,
                     );
                   }
                 },
-                child: Text(
-                  islast ? 'Finish' : 'Next',
-                  style: TextStyle(color: Colors.white),
-                ),
+                text: islast ? 'Finish' : 'Next',
               ),
+
               Spacer(flex: 2),
             ],
           );

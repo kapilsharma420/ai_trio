@@ -33,10 +33,11 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  
-  icons_launcher: ^3.0.1 #for change the app icon 
 
+  #packges for ai_trio comes from pub.dev
+  
+  cupertino_icons: ^1.0.8
+  icons_launcher: ^3.0.1 #for change the app icon 
   lottie: ^3.3.1 #for adding lottie animation
   shared_preferences: ^2.5.3 #for storing the data locally
   get: ^4.7.2 #for simplifying the process and state management
@@ -44,7 +45,9 @@ dependencies:
   http: ^1.4.0 #for making http requests
   google_generative_ai: ^0.4.7 #for using google generative ai
   animated_text_kit: ^4.2.3 #for animated text effects(for make please wait animated )
-  
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
