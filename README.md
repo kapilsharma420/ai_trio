@@ -1,16 +1,31 @@
-# ai_trio
+🧠 AI Trio
+AI Trio is a smart, all-in-one Flutter app that brings together the power of:
 
-A new Flutter project.
+🤖 Gemini AI Chatbot
 
-## Getting Started
+🎨 Imagine.art AI Image Generator
 
-This project is a starting point for a Flutter application.
+🌐 Multi-language Text Translator
 
-A few resources to get you started if this is your first Flutter project:
+A sleek, modern Flutter app to explore AI capabilities across conversation, creativity, and communication.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🚀 Features
+🤖 AI Chatbot (Gemini API)
+Chat with a powerful AI assistant using Google’s Gemini API. It helps answer questions, provides recommendations, and offers human-like interactions.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🎨 AI Image Generator (Imagine.art API)
+Convert your text prompts into beautiful AI-generated images using Imagine.art API.
+
+🌐 Language Translator
+Translate text between multiple languages using the language_translator Flutter package — ideal for breaking language barriers instantly.
+
+🛠️ Tech Stack
+* Flutter (UI framework)
+
+* GetX (state management)
+
+* Gemini API (AI Chatbot)
+
+* Imagine.art API (Text-to-image AI)
+
+* language_translator package (Multilingual translation)
