@@ -11,6 +11,7 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  final isDarkMode = false.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +31,9 @@ class _HomescreenState extends State<Homescreen> {
             icon: Icon(Icons.brightness_4_rounded, color: Colors.blue),
             onPressed: () {
               // Handle dark and light mode logic 
+              isDarkMode.value = !isDarkMode.value;
+              Get.changeTheme(isDarkMode.value ? ThemeData.dark() : ThemeData.light());
+              
              
             },
           ),
