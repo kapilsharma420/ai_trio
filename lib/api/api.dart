@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:translator_plus/translator_plus.dart';
 import '../helper/global.dart';
 
 class APIs {
@@ -41,6 +42,19 @@ class APIs {
     } catch (e) {
       log('getAnswerGeminiE: $e');
       return 'Something went wrong (Try again in sometime)';
+    }
+  }
+
+  
+  static Future<String> googleTranslate(
+      {required String from, required String to, required String text}) async {
+    try {
+      final res = await GoogleTranslator().translate(text, from: from, to: to);
+
+      return res.text;
+    } catch (e) {
+      log('googleTranslateE: $e ');
+      return 'Something went wrong!';
     }
   }
 }

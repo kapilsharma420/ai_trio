@@ -45,7 +45,8 @@ dependencies:
   http: ^1.4.0 #for making http requests
   google_generative_ai: ^0.4.7 #for using google generative ai
   animated_text_kit: ^4.2.3 #for animated text effects(for make please wait animated )
-
+  # For Google Language Translate
+  translator_plus: ^1.0.1
 
 
 dev_dependencies:
