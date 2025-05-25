@@ -28,4 +28,4 @@ Translate text between multiple languages using the language_translator Flutter 
 
 * Imagine.art API (Text-to-image AI)
 
-* language_translator package (Multilingual translation)
+* language_translator package (Multi-language translation)
