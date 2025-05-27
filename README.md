@@ -1,4 +1,4 @@
-🧠 AI Trio
+🧠 AI Trio:
 AI Trio is a smart, all-in-one Flutter app that brings together the power of:
 
 🤖 Gemini AI Chatbot
