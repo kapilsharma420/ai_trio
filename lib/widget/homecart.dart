@@ -7,12 +7,10 @@ import 'package:lottie/lottie.dart';
 class Homecart extends StatelessWidget {
   final HomeType homeType;
   const Homecart({super.key, required this.homeType});
-
   @override
   Widget build(BuildContext context) {
     //for developing purpose
     Animate.restartOnHotReload = true;
-
     return Card(
           color: Colors.blue.withOpacity(.2),
           elevation: 0,
@@ -34,24 +32,15 @@ class Homecart extends StatelessWidget {
                             padding: homeType.padding,
                             child: Lottie.asset(
                               'assets/LottieAnimation/${homeType.lottie}',
-                            ),
-                          ),
-                        ),
+                            ),                          ),                        ),
                         //for some space
                         Spacer(),
                         //title
-                        Text(
-                          homeType.title,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1,
+                        Text(  homeType.title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500, letterSpacing: 1,
                           ),
                         ),
                         //fore some space
-                        Spacer(flex: 2),
-                      ],
-                    )
+                        Spacer(flex: 2),                      ],                    )
                     : Row(
                       children: [
                         //for some space
@@ -74,14 +63,7 @@ class Homecart extends StatelessWidget {
                           child: Padding(
                             padding: homeType.padding,
                             child: Lottie.asset(
-                              'assets/LottieAnimation/${homeType.lottie}',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-          ),
-        )
+                              'assets/LottieAnimation/${homeType.lottie}', ),  ), ), ], ),),)
         .animate()
         .fade(begin: 0.0, end: 1.0, duration: 1500.ms)
         .scale(

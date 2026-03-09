@@ -21,91 +21,53 @@ class ImageController extends GetxController {
 
   /// Error message for API errors
   String? errorMessage;
+  final _apiKey = salabilityAI_API_KEY;
+  static const String _apiUrl =
+      'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image';
 
-  final _apiKey = ImagineArtApiKey;
-
-  static const String _apiUrl = 'https://api.vyro.ai/v2/image/generations';
-
-  /// Generates an image using Vyro.ai API
-  /// Returns the image as base64 encoded string
   Future<void> createImage() async {
-    final userInput = textC.text.trim();
-
-    if (userInput.isEmpty) {
-      Get.snackbar(
-        "Error",
-        "Please enter a prompt",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.shade100,
-      );
-      return;
-    }
+    final prompt = textC.text.trim();
+    if (prompt.isEmpty) return;
 
     status.value = Status.loading;
-    errorMessage = null;
     base64Image = '';
+    errorMessage = null;
 
     try {
-      log("Starting image generation with prompt: $userInput");
-
-      // Create multipart request as per Imagine.art API docs
-      var request = http.MultipartRequest('POST', Uri.parse(_apiUrl));
-
-      // Add headers exactly as shown in the API docs
-      request.headers.addAll({'Authorization': 'Bearer $_apiKey'});
-
-      // Add fields exactly as shown in the API docs
-      request.fields.addAll({
-        'prompt': userInput,
-        'style': 'realistic', // Adding style parameter as per API docs
-        'aspect_ratio': '1:1',
-      });
-
-      log("Sending request to Imagine.art API...");
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
-
-      log("Response status: ${response.statusCode}");
-      log("Response headers: ${response.headers}");
+      final response = await http.post(
+        Uri.parse(
+          'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $salabilityAI_API_KEY',
+        },
+        body: jsonEncode({
+          "text_prompts": [
+            {"text": prompt},
+          ],
+          "cfg_scale": 7,
+          "height": 1024,
+          "width": 1024,
+          "samples": 1,
+          "steps": 30,
+        }),
+      );
 
       if (response.statusCode == 200) {
-        // The API returns the image directly as binary data
-        final bytes = response.bodyBytes;
-        if (bytes.isNotEmpty) {
-          // Convert the image bytes to base64
-          base64Image = base64Encode(bytes);
-          log("Successfully encoded image to base64: ${bytes.length} bytes");
-          status.value = Status.complete;
-          textC.clear();
-        } else {
-          throw Exception("Empty image received");
-        }
+        final data = jsonDecode(response.body);
+        base64Image = data['artifacts'][0]['base64'];
+        status.value = Status.complete;
+        textC.clear();
       } else {
-        log("API Error: ${response.statusCode} - ${response.reasonPhrase}");
-        log("Error response body: ${response.body}");
-
-        // Try to parse error message if it's JSON
-        try {
-          final errorJson = jsonDecode(response.body);
-          final errorMsg =
-              errorJson['error'] ??
-              errorJson['message'] ??
-              response.reasonPhrase;
-          throw Exception("API Error: $errorMsg");
-        } catch (e) {
-          throw Exception(
-            "API Error: ${response.reasonPhrase ?? 'Unknown error'}",
-          );
-        }
+        throw Exception(response.body);
       }
     } catch (e) {
-      log("Image generation error details: ${e.toString()}");
-      errorMessage = e.toString();
       status.value = Status.error;
+      errorMessage = e.toString();
       Get.snackbar(
         "Error",
         errorMessage!,
-        snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.shade100,
       );
     }

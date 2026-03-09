@@ -41,8 +41,8 @@ class _ImageFeatureState extends State<ImageFeature> {
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
                 hintText:
-                    'Imagine something wonderful & innovative\nType here & I will create for you 😃',
-                hintStyle: const TextStyle(fontSize: 14.5),
+                    'Imagine something wonderful & innovative\nType here & I will create for you ....',
+                hintStyle: const TextStyle(fontSize: 14.5,color: Colors.black26),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

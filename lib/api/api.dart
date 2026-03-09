@@ -1,12 +1,13 @@
+
+import 'dart:convert';
 import 'dart:developer';
-import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:http/http.dart' as http;
 import 'package:translator_plus/translator_plus.dart';
 import '../helper/global.dart';
 
 class APIs {
-  /// Get answer from Google Gemini AI
+  /// Get answer from Google Gemini AI (REST API)
   static Future<String> getAnswer(String question) async {
-    // Check for empty or whitespace-only input
     if (question.trim().isEmpty) {
       return 'Please enter a valid question.';
     }
@@ -15,25 +16,37 @@ class APIs {
       log('api key: $ApiKey');
       log('user question: $question');
 
-      final model = GenerativeModel(
-        model: 'gemini-1.5-flash-latest',
-        apiKey: ApiKey,
+      final url = Uri.parse(
+'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=$ApiKey'
+);
+
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "contents": [
+            {
+              "parts": [
+                {"text": question}
+              ]
+            }
+          ]
+        }),
       );
 
-      final content = [Content.text(question)];
-      final res = await model.generateContent(
-        content,
-        safetySettings: [
-          SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.none),
-          SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.none),
-          SafetySetting(HarmCategory.harassment, HarmBlockThreshold.none),
-          SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.none),
-        ],
-      );
+      if (response.statusCode != 200) {
+        log('HTTP Error: ${response.body}');
+        return 'Something went wrong (Server Error)';
+      }
 
-      final answer = res.text;
+      final data = jsonDecode(response.body);
 
-      if (answer == null || answer.trim().isEmpty) {
+      final answer =
+          data['candidates'][0]['content']['parts'][0]['text'];
+
+      if (answer == null || answer.toString().trim().isEmpty) {
         return 'AI could not generate a response.';
       }
 
@@ -45,15 +58,18 @@ class APIs {
     }
   }
 
-  
-  static Future<String> googleTranslate(
-      {required String from, required String to, required String text}) async {
+  /// Google Translate
+  static Future<String> googleTranslate({
+    required String from,
+    required String to,
+    required String text,
+  }) async {
     try {
-      final res = await GoogleTranslator().translate(text, from: from, to: to);
-
+      final res =
+          await GoogleTranslator().translate(text, from: from, to: to);
       return res.text;
     } catch (e) {
-      log('googleTranslateE: $e ');
+      log('googleTranslateE: $e');
       return 'Something went wrong!';
     }
   }
