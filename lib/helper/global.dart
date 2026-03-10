@@ -1,9 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // gemini api key
-const String ApiKey =
-    // 'AIzaSyB2s_tAVGgtL6Cf6us6uYHtHaXWZW_OPPU'
-    // ;
-    'AIzaSyCJWlnebjfRYHycOVQFrfeQeeLV8upzMKs';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+final String ApiKey = dotenv.env['ApiKey_chat']!;
 
 // Imagine.art API configuration
-const String salabilityAI_API_KEY =
-    'sk-W3MVzT75wp7XGxHev04y0zpSobYfV7sDytSeEp7gKQTwaIY2';
+final String salabilityAI_API_KEY = dotenv.env['salabilityAI_API_KEY']!;
