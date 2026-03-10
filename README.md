@@ -1,4 +1,4 @@
-🧠 AI Trio
+🧠 AI Trio:
 AI Trio is a smart, all-in-one Flutter app that brings together the power of:
 
 🤖 Gemini AI Chatbot
@@ -28,4 +28,4 @@ Translate text between multiple languages using the language_translator Flutter 
 
 * Imagine.art API (Text-to-image AI)
 
-* language_translator package (Multilingual translation)
+* language_translator package (Multi-language translation)
